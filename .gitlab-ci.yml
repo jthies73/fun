@@ -1,0 +1,36 @@
+default:
+    image: node:20-alpine
+    cache:
+        paths:
+            - node_modules/
+
+stages:
+    - Validation
+    - Deployment
+
+Lint & Test:
+    stage: Validation
+    interruptible: true
+    script:
+        - yarn install
+        - yarn lint
+        - yarn test
+
+Build & Deploy Image:
+    stage: Deployment
+    interruptible: true
+    image: docker:24.0.6-dind
+    services:
+        - name: docker:24.0.6-dind
+    script:
+        - cp $ENV ./.env.production
+        - docker build -t yafa-pwa-image .
+        - docker stop yafa-pwa || true && docker rm yafa-pwa || true
+        - docker run -d --net yafa-net --ip 172.37.0.26 --name yafa-pwa yafa-pwa-image
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: never
+        - if: '$CI_COMMIT_BRANCH == "master"'
+          when: on_success
+        - if: '$CI_COMMIT_BRANCH != "master"'
+          when: manual

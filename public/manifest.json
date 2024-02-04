@@ -1,0 +1,17 @@
+{
+	"theme_color": "#1fc7b9",
+	"background_color": "#1fc7b9",
+	"display": "fullscreen",
+	"scope": "/",
+	"start_url": "/",
+	"name": "Y A F A",
+	"short_name": "Y A F A",
+	"icons": [
+		{
+			"src": "icons/logo_yafa_512px.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	]
+}
