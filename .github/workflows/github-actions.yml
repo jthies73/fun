@@ -6,11 +6,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      # - name: Cache node modules
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: fun/node_modules
-      #     key: ${{ runner.os }}-node-${{ hashFiles('fun/package-lock.json') }}
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: fun/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('fun/package-lock.json') }}
       - name: Lint & Test
         working-directory: ./
         run: |
@@ -34,4 +34,4 @@ jobs:
           echo "Deploying fun-app image 🚀"
           ls -al
           docker stop fun-app || true && docker rm fun-app || true
-          docker run -d --net fun-net --ip 172.41.0.21 --name fun-app fun-app-image
+          docker run -d --net fun-net --ip 172.42.0.21 --name fun-app fun-app-image
