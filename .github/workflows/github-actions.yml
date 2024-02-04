@@ -9,8 +9,8 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: fun-app/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('fun-app/package-lock.json') }}
+          path: fun/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('fun/package-lock.json') }}
       - name: Lint & Test
         working-directory: ./fun-app
         run: |
