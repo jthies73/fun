@@ -15,11 +15,11 @@ jobs:
         working-directory: ./
         run: |
           echo "Installing fun-app dependencies ... 📦"
-          yarn
+          npm install
           echo "Testing fun-app ... 🧪"
-          yarn test
+          npm run test
           echo "Linting fun-app ... 🧹"
-          yarn lint
+          npm run lint
       - name: Build image
         env:
           API_BASE_URL: ${{ secrets.API_BASE_URL }} # TODO: make this dynamic
