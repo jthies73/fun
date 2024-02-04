@@ -1,4 +1,4 @@
-# yafa-pwa
+# fun-pwa
 
 Stack:
 

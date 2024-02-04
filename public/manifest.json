@@ -4,11 +4,11 @@
 	"display": "fullscreen",
 	"scope": "/",
 	"start_url": "/",
-	"name": "Y A F A",
-	"short_name": "Y A F A",
+	"name": "F.U.N.",
+	"short_name": "F.U.N.",
 	"icons": [
 		{
-			"src": "icons/logo_yafa_512px.png",
+			"src": "icons/logo_fun_512px.png",
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "any maskable"

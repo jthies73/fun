@@ -1,7 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.custom-label {
-	@apply absolute -top-2 left-5 px-1 text-xs focus:ring-0 select-none text-gray-900 bg-white;
-}

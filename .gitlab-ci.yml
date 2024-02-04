@@ -24,9 +24,9 @@ Build & Deploy Image:
         - name: docker:24.0.6-dind
     script:
         - cp $ENV ./.env.production
-        - docker build -t yafa-pwa-image .
-        - docker stop yafa-pwa || true && docker rm yafa-pwa || true
-        - docker run -d --net yafa-net --ip 172.37.0.26 --name yafa-pwa yafa-pwa-image
+        - docker build -t fun-pwa-image .
+        - docker stop fun-pwa || true && docker rm fun-pwa || true
+        - docker run -d --net yafa-net --ip 172.37.0.26 --name fun-pwa fun-pwa-image
     rules:
         - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
           when: never
