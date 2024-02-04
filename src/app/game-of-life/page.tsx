@@ -1,11 +1,10 @@
 "use client";
 
-import { Head } from "next/document";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { classNames } from "@/lib/utils";
 
-export default function page() {
+export default function Page() {
 	const [grid, setGrid] = useState<Array<Array<boolean>>>([]);
 	const [lastCellClicked, setLastCellClicked] = useState<Array<number>>([]);
 
