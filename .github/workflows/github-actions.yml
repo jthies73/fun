@@ -1,0 +1,37 @@
+name: GitHub Actions Pipeline 🚀
+run-name: ${{ github.actor }} is deploying fun-app 🚀
+on: [push]
+jobs:
+  Deploy-fun-app:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: fun-app/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('fun-app/package-lock.json') }}
+      - name: Lint & Test
+        working-directory: ./fun-app
+        run: |
+          echo "Installing fun-app dependencies ... 📦"
+          yarn
+          echo "Testing fun-app ... 🧪"
+          yarn test
+          echo "Linting fun-app ... 🧹"
+          yarn lint
+      - name: Build image
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }} # TODO: make this dynamic
+        working-directory: ./fun-app
+        run: |
+          echo "Building fun-app image... 🏗"
+          echo "REACT_APP_API_BASE_URL=$API_BASE_URL" >> .env
+          docker build -t fun-app-image .
+      - name: Deploy image
+        working-directory: ./fun-app
+        run: |
+          echo "Deploying fun-app image 🚀"
+          ls -al
+          docker stop fun-app || true && docker rm fun-app || true
+          docker run -d --net fun-net --ip 172.41.0.21 --name fun-app fun-app-image
