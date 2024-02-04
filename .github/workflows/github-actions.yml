@@ -6,13 +6,13 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: fun/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('fun/package-lock.json') }}
+      # - name: Cache node modules
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: fun/node_modules
+      #     key: ${{ runner.os }}-node-${{ hashFiles('fun/package-lock.json') }}
       - name: Lint & Test
-        working-directory: ./fun-app
+        working-directory: ./
         run: |
           echo "Installing fun-app dependencies ... 📦"
           yarn
@@ -23,13 +23,13 @@ jobs:
       - name: Build image
         env:
           API_BASE_URL: ${{ secrets.API_BASE_URL }} # TODO: make this dynamic
-        working-directory: ./fun-app
+        working-directory: ./
         run: |
           echo "Building fun-app image... 🏗"
           echo "REACT_APP_API_BASE_URL=$API_BASE_URL" >> .env
           docker build -t fun-app-image .
       - name: Deploy image
-        working-directory: ./fun-app
+        working-directory: ./
         run: |
           echo "Deploying fun-app image 🚀"
           ls -al
